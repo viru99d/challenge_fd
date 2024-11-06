@@ -1,0 +1,31 @@
+name: challenge_fd
+description: "A new Flutter project."
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_lints: ^4.0.0
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  flutter_modular: ^5.0.0
+  modular_bloc_bind: ^1.0.1
+  shared_preferences: ^2.3.2
+  fluttertoast: ^8.2.8
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+  uses-material-design: true
