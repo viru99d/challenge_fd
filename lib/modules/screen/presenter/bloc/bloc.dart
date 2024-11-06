@@ -1,4 +1,3 @@
-// presentation/bloc/auth_bloc.dart
 import 'package:challenge_fd/modules/screen/domain/use_cases/check_autentication_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
