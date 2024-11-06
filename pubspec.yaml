@@ -19,6 +19,8 @@ dependencies:
   modular_bloc_bind: ^1.0.1
   shared_preferences: ^2.3.2
   fluttertoast: ^8.2.8
+  dio: ^5.7.0
+  flutter_svg: ^2.0.13
 
 
 dev_dependencies:
@@ -29,3 +31,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+    

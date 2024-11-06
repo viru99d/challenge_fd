@@ -1,6 +1,6 @@
 import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/modules/login/domain/entity/user_entity.dart';
-import 'package:challenge_fd/modules/login/domain/repository/login_repository.dart';
+import 'package:challenge_fd/modules/login/domain/use_cases/login_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,10 +8,10 @@ part 'event.dart';
 part 'state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginRepository loginRepository;
+  final LoginUseCase loginUseCase;
 
   LoginBloc(
-    this.loginRepository,
+    this.loginUseCase,
   ) : super(
           const InitialState(
             Model(),
@@ -56,7 +56,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       password: state.model.lastName,
     );
 
-    final isAuthenticated = await loginRepository.login(userEntity);
+    final isAuthenticated = await loginUseCase.call(userEntity);
 
     if (isAuthenticated) {
       emit(LoginSuccessState(state.model));
@@ -64,7 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         LoginFailureState(
           state.model,
-          errorMessage: Constants.loginErrorMessage,
+          errorMessage: Constants.text.loginErrorMessage,
         ),
       );
     }

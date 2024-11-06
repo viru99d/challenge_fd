@@ -1,8 +1,17 @@
 class Constants {
-  static const String loginTitle = 'Iniciar Sesión';
-  static const String nameTextField = 'Nombre';
-  static const String lastNameTextField = 'Contraseña';
-  static const String loginButtonTitle = 'Iniciar Sesión';
-  static const String loginErrorMessage =
+  static final text = _Text();
+  static final assets = _Assets();
+}
+
+class _Text {
+  final String loginTitle = 'Iniciar Sesión';
+  final String nameTextField = 'Nombre';
+  final String lastNameTextField = 'Contraseña';
+  final String loginButtonTitle = 'Iniciar Sesión';
+  final String loginErrorMessage =
       'Datos incorrectos, por favor valida nuevamente.';
+}
+
+class _Assets {
+  final String logo = 'assets/logo.svg';
 }

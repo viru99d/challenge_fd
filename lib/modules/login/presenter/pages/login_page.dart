@@ -39,16 +39,16 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  Constants.loginTitle,
-                  style: TextStyle(
+                Text(
+                  Constants.text.loginTitle,
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 VerticalSpace.md,
                 LoginTextField(
-                  title: Constants.nameTextField,
+                  title: Constants.text.nameTextField,
                   onChanged: (value) {
                     loginBloc.add(
                       UpdateNameEvent(value),
@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 VerticalSpace.md,
                 LoginTextField(
-                  title: Constants.lastNameTextField,
+                  title: Constants.text.lastNameTextField,
                   onChanged: (value) {
                     loginBloc.add(
                       UpdateLastNameEvent(value),
@@ -73,7 +73,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: state.model.canContinue
                             ? () => loginBloc.add(LoginSubmittedEvent())
                             : null,
-                        child: const Text(Constants.loginButtonTitle),
+                        child: Text(Constants.text.loginButtonTitle),
                       ),
                     );
                   },
