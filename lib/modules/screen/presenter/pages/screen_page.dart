@@ -20,7 +20,9 @@ class ScreenPage extends StatelessWidget {
       create: (context) => screenBloc..add(CheckAuthentication()),
       child: BlocListener<ScreenBloc, ScreenState>(
         listener: (context, state) {
-          if (state is AuthenticatedState) {}
+          if (state is AuthenticatedState) {
+            Modular.to.navigate(Routes.home);
+          }
           if (state is UnauthenticatedState) {
             Modular.to.navigate(Routes.login);
           }
