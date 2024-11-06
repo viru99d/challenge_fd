@@ -1,7 +1,5 @@
 import 'package:challenge_fd/core/config/config.dart';
-import 'package:challenge_fd/core/module.dart';
-import 'package:challenge_fd/modules/login/presenter/bloc/bloc.dart';
-import 'package:challenge_fd/modules/login/presenter/pages/login_page.dart';
+import 'package:challenge_fd/core/app_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -21,10 +19,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(
-        loginBloc: Modular.get<LoginBloc>(),
-      ),
+    return MaterialApp.router(
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }
