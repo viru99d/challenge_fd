@@ -22,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ) {
     on<GetPostsEvent>(_getPostEvent);
     on<LogOutEvent>(_logOutEvent);
+    on<SearchPostsEvent>(_searchPostsEvent);
   }
 
   Future<void> _getPostEvent(
@@ -39,10 +40,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         LoadedPostState(
           state.model.copyWith(
             posts: posts,
+            allPosts: posts,
           ),
         ),
       );
     } catch (e) {
+      if (state.model.posts.isEmpty) {
+        emit(
+          EmptyPostState(state.model),
+        );
+        return;
+      }
       emit(
         ErrorState(
           state.model,
@@ -74,5 +82,42 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     }
+  }
+
+  void _searchPostsEvent(
+    SearchPostsEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    List<PostEntity> filteredPosts = [];
+
+    final query = event.query.toLowerCase();
+
+    if (query.isEmpty) {
+      emit(
+        LoadedPostState(
+          state.model.copyWith(
+            posts: state.model.allPosts,
+          ),
+        ),
+      );
+
+      return;
+    }
+    final matchingUserIds = state.model.allPosts
+        .where((post) => post.title.toLowerCase().contains(query))
+        .map((post) => post.userId)
+        .toSet();
+
+    filteredPosts = state.model.allPosts
+        .where((post) => matchingUserIds.contains(post.userId))
+        .toList();
+
+    emit(
+      LoadedPostState(
+        state.model.copyWith(
+          posts: filteredPosts,
+        ),
+      ),
+    );
   }
 }

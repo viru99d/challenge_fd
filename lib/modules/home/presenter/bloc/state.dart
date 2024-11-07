@@ -35,23 +35,32 @@ class UnloggedState extends HomeState {
   const UnloggedState(super.model);
 }
 
+class EmptyPostState extends HomeState {
+  const EmptyPostState(super.model);
+}
+
 class Model extends Equatable {
   const Model({
     this.posts = const [],
+    this.allPosts = const [],
   });
 
   final List<PostEntity> posts;
+  final List<PostEntity> allPosts;
 
   @override
   List<Object?> get props => [
         posts,
+        allPosts,
       ];
 
   Model copyWith({
     List<PostEntity>? posts,
+    List<PostEntity>? allPosts,
   }) {
     return Model(
       posts: posts ?? this.posts,
+      allPosts: allPosts ?? this.allPosts,
     );
   }
 }

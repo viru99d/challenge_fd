@@ -16,6 +16,7 @@ class _Text {
   final String password = 'password';
   final String reload = 'Recargar';
   final String homeTitle = 'Posts';
+  final String searchLabel = 'Buscar por nombre de usuario';
 }
 
 class _Assets {
