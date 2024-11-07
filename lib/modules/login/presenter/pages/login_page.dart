@@ -3,6 +3,7 @@ import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/core/spacing.dart';
 import 'package:challenge_fd/modules/login/presenter/bloc/bloc.dart';
 import 'package:challenge_fd/modules/login/presenter/pages/widgets/login_text_field.dart';
+import 'package:challenge_fd/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -53,6 +54,7 @@ class LoginPage extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w700,
+                    color: Colors.orange,
                   ),
                 ),
                 VerticalSpace.md,
@@ -77,14 +79,11 @@ class LoginPage extends StatelessWidget {
                 VerticalSpace.md,
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: state.model.canContinue
-                            ? () => loginBloc.add(LoginSubmittedEvent())
-                            : null,
-                        child: Text(Constants.text.loginButtonTitle),
-                      ),
+                    return PrimaryButton(
+                      onPressed: () => state.model.canContinue
+                          ? loginBloc.add(LoginSubmittedEvent())
+                          : null,
+                      title: Constants.text.loginButtonTitle,
                     );
                   },
                 ),
