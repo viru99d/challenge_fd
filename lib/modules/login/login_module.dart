@@ -1,5 +1,5 @@
 import 'package:challenge_fd/core/config/preferences/preferences.dart';
-import 'package:challenge_fd/modules/login/data/repository/login_repository_impl.dart';
+import 'package:challenge_fd/modules/login/data/login_repository_impl.dart';
 import 'package:challenge_fd/modules/login/domain/repository/login_repository.dart';
 import 'package:challenge_fd/modules/login/domain/use_cases/login_use_case.dart';
 import 'package:challenge_fd/modules/login/presenter/bloc/bloc.dart';
