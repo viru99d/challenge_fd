@@ -21,10 +21,18 @@ class LoadedPostState extends HomeState {
   const LoadedPostState(super.model);
 }
 
-class ErrorPostState extends HomeState {
-  const ErrorPostState(super.model, {required this.errorMessage});
+class ErrorState extends HomeState {
+  const ErrorState(super.model, {required this.errorMessage});
 
   final String errorMessage;
+}
+
+class LoadingState extends HomeState {
+  const LoadingState(super.model);
+}
+
+class UnloggedState extends HomeState {
+  const UnloggedState(super.model);
 }
 
 class Model extends Equatable {

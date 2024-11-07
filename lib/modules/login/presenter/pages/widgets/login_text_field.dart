@@ -20,6 +20,7 @@ class LoginTextField extends StatelessWidget {
         labelText: title,
         border: const OutlineInputBorder(),
       ),
+      keyboardType: TextInputType.emailAddress,
       obscureText: oscureText,
       onChanged: onChanged,
     );

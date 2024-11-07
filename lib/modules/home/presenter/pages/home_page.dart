@@ -1,7 +1,9 @@
+import 'package:challenge_fd/core/config/routes.dart';
 import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/modules/home/presenter/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
@@ -33,6 +35,20 @@ class HomePage extends StatelessWidget {
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () => homeBloc.add(
+              LogOutEvent(),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       body: BlocProvider(
         create: (context) => homeBloc
@@ -41,7 +57,7 @@ class HomePage extends StatelessWidget {
           ),
         child: BlocListener<HomeBloc, HomeState>(
           listener: (context, state) {
-            if (state is ErrorPostState) {
+            if (state is ErrorState) {
               Fluttertoast.showToast(
                 msg: state.errorMessage,
                 toastLength: Toast.LENGTH_LONG,
@@ -50,6 +66,10 @@ class HomePage extends StatelessWidget {
                 backgroundColor: Colors.red,
                 fontSize: 16.0,
               );
+            }
+
+            if (state is UnloggedState) {
+              Modular.to.navigate(Routes.login);
             }
           },
           child: BlocBuilder<HomeBloc, HomeState>(

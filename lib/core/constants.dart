@@ -12,6 +12,8 @@ class _Text {
       'Datos incorrectos, por favor valida nuevamente.';
   final String homeToastErrorMessage = 'Ha ocurrido un error inésperado';
   final String homePageErrorMessage = 'No hay posts disponibles';
+  final String email = 'challenge@fudo';
+  final String password = 'password';
 }
 
 class _Assets {

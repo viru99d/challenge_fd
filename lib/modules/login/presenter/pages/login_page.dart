@@ -1,9 +1,11 @@
+import 'package:challenge_fd/core/config/routes.dart';
 import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/core/spacing.dart';
 import 'package:challenge_fd/modules/login/presenter/bloc/bloc.dart';
 import 'package:challenge_fd/modules/login/presenter/pages/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatelessWidget {
@@ -25,6 +27,9 @@ class LoginPage extends StatelessWidget {
           ),
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
+              if (state is LoadingState) {
+                const CircularProgressIndicator();
+              }
               if (state is LoginFailureState) {
                 Fluttertoast.showToast(
                   msg: state.errorMessage,
@@ -34,6 +39,10 @@ class LoginPage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   fontSize: 16.0,
                 );
+              }
+
+              if (state is LoginSuccessState) {
+                Modular.to.navigate(Routes.home);
               }
             },
             child: Column(
@@ -58,6 +67,7 @@ class LoginPage extends StatelessWidget {
                 VerticalSpace.md,
                 LoginTextField(
                   title: Constants.text.lastNameTextField,
+                  oscureText: true,
                   onChanged: (value) {
                     loginBloc.add(
                       UpdateLastNameEvent(value),
