@@ -14,6 +14,8 @@ class _Text {
   final String homePageErrorMessage = 'No hay posts disponibles';
   final String email = 'challenge@fudo';
   final String password = 'password';
+  final String reload = 'Recargar';
+  final String homeTitle = 'Posts';
 }
 
 class _Assets {
