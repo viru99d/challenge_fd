@@ -17,6 +17,14 @@ class _Text {
   final String reload = 'Recargar';
   final String homeTitle = 'Posts';
   final String searchLabel = 'Buscar por nombre de usuario';
+  final String savePostError =
+      'Ha ocurrido un error guardando el post, intente nuevamente más tarde';
+  final String savePostSuccess = 'Post guardado con éxito';
+  final String createNewPost = 'Crear nuevo post';
+  final String savePostTitle = 'Title';
+  final String savePostBody = 'Body';
+  final String savePostUserId = 'UserId';
+  final String savePostButton = 'Guardar Post';
 }
 
 class _Assets {

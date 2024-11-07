@@ -3,6 +3,7 @@ import 'package:challenge_fd/modules/home/data/repository_impl/home_repository_i
 import 'package:challenge_fd/modules/home/domain/repository/home_repository.dart';
 import 'package:challenge_fd/modules/home/domain/use_cases/get_posts_use_case.dart';
 import 'package:challenge_fd/modules/home/domain/use_cases/log_out_use_case.dart';
+import 'package:challenge_fd/modules/home/domain/use_cases/save_post_use_case.dart';
 import 'package:challenge_fd/modules/home/presenter/bloc/bloc.dart';
 import 'package:challenge_fd/modules/home/presenter/pages/home_page.dart';
 import 'package:dio/dio.dart';
@@ -28,9 +29,15 @@ class HomeModule extends Module {
           ),
         ),
         Bind.factory(
+          (i) => SavePostUseCase(
+            i.get<HomeRepository>(),
+          ),
+        ),
+        Bind.factory(
           (i) => HomeBloc(
             getPostsUseCase: i.get<GetPostsUseCase>(),
             logOutUseCase: i.get<LogOutUseCase>(),
+            savePostUseCase: i.get<SavePostUseCase>(),
           ),
         ),
       ];

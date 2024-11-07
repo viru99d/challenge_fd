@@ -4,10 +4,15 @@ import 'package:challenge_fd/core/spacing.dart';
 import 'package:challenge_fd/modules/home/domain/entity/post_entity.dart';
 import 'package:challenge_fd/modules/home/presenter/bloc/bloc.dart';
 import 'package:challenge_fd/widgets/primary_button.dart';
+import 'package:challenge_fd/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+part '_sections/create_post.dart';
+part '_sections/empty_posts.dart';
+part '_sections/loaded_posts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -21,7 +26,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => createPost(
+          context,
+          homeBloc: homeBloc,
+        ),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         child: const Icon(
@@ -74,6 +82,27 @@ class HomePage extends StatelessWidget {
             if (state is UnloggedState) {
               Modular.to.navigate(Routes.login);
             }
+
+            if (state is SavingPostState) {
+              const CircularProgressIndicator();
+            }
+
+            if (state is SavingPostState) {
+              const CircularProgressIndicator();
+            }
+
+            if (state is SavedPostState) {
+              Modular.to.pop();
+              Fluttertoast.showToast(
+                msg: Constants.text.savePostSuccess,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.TOP,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                fontSize: 16.0,
+              );
+              homeBloc.add(GetPostsEvent());
+            }
           },
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
@@ -83,120 +112,13 @@ class HomePage extends StatelessWidget {
                 return EmptyState(homeBloc: homeBloc);
               }
               final posts = state.model.posts;
-              return LoadedState(
+              return LoadedPosts(
                 homeBloc: homeBloc,
                 posts: posts,
               );
             },
           ),
         ),
-      ),
-    );
-  }
-}
-
-class LoadedState extends StatelessWidget {
-  const LoadedState({
-    super.key,
-    required this.homeBloc,
-    required this.posts,
-  });
-
-  final HomeBloc homeBloc;
-  final List<PostEntity> posts;
-
-  @override
-  Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async => homeBloc.add(
-        GetPostsEvent(),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: Spacing.md,
-              right: Spacing.md,
-              top: Spacing.md,
-            ),
-            child: TextField(
-              onChanged: (query) {
-                homeBloc.add(SearchPostsEvent(query));
-              },
-              decoration: InputDecoration(
-                labelText: Constants.text.searchLabel,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          VerticalSpace.xs,
-          Expanded(
-            child: Scrollbar(
-              child: ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (context, index) {
-                  final post = posts[index];
-
-                  return Container(
-                    margin: const EdgeInsets.only(
-                      left: 10.0,
-                      top: 10.0,
-                      right: 10.0,
-                    ),
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.orange,
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        '${post.userId}- ${post.title}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      subtitle: Text(
-                        post.body,
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class EmptyState extends StatelessWidget {
-  const EmptyState({
-    super.key,
-    required this.homeBloc,
-  });
-
-  final HomeBloc homeBloc;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            Constants.text.homePageErrorMessage,
-            style: const TextStyle(fontWeight: FontWeight.w700),
-          ),
-          PrimaryButton(
-            onPressed: () => homeBloc.add(GetPostsEvent()),
-            title: Constants.text.reload,
-          )
-        ],
       ),
     );
   }

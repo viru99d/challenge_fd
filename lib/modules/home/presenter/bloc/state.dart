@@ -39,28 +39,53 @@ class EmptyPostState extends HomeState {
   const EmptyPostState(super.model);
 }
 
+class UpdatedTitleState extends HomeState {
+  const UpdatedTitleState(super.model);
+}
+
+class UpdatedBodyState extends HomeState {
+  const UpdatedBodyState(super.model);
+}
+
+class UpdatedUserIdState extends HomeState {
+  const UpdatedUserIdState(super.model);
+}
+
+class SavedPostState extends HomeState {
+  const SavedPostState(super.model);
+}
+
+class SavingPostState extends HomeState {
+  const SavingPostState(super.model);
+}
+
 class Model extends Equatable {
   const Model({
-    this.posts = const [],
     this.allPosts = const [],
+    this.posts = const [],
+    this.postEntity = const PostEntity(),
   });
 
-  final List<PostEntity> posts;
   final List<PostEntity> allPosts;
+  final List<PostEntity> posts;
+  final PostEntity postEntity;
 
   @override
   List<Object?> get props => [
-        posts,
         allPosts,
+        posts,
+        postEntity,
       ];
 
   Model copyWith({
-    List<PostEntity>? posts,
     List<PostEntity>? allPosts,
+    List<PostEntity>? posts,
+    PostEntity? postEntity,
   }) {
     return Model(
-      posts: posts ?? this.posts,
       allPosts: allPosts ?? this.allPosts,
+      posts: posts ?? this.posts,
+      postEntity: postEntity ?? this.postEntity,
     );
   }
 }

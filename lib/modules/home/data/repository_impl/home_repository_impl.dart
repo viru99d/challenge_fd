@@ -23,4 +23,12 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<void> logOut() async {
     preferences.clear();
   }
+
+  @override
+  Future<void> savePost(PostModel postModel) async {
+    await dio.post(
+      '/posts',
+      data: postModel.toJson(),
+    );
+  }
 }
