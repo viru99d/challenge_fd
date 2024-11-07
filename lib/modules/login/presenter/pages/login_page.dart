@@ -2,8 +2,8 @@ import 'package:challenge_fd/core/config/routes.dart';
 import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/core/spacing.dart';
 import 'package:challenge_fd/modules/login/presenter/bloc/bloc.dart';
-import 'package:challenge_fd/modules/login/presenter/pages/widgets/login_text_field.dart';
 import 'package:challenge_fd/widgets/primary_button.dart';
+import 'package:challenge_fd/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -58,8 +58,9 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 VerticalSpace.md,
-                LoginTextField(
+                PrimaryTextField(
                   title: Constants.text.nameTextField,
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
                     loginBloc.add(
                       UpdateNameEvent(value),
@@ -67,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   },
                 ),
                 VerticalSpace.md,
-                LoginTextField(
+                PrimaryTextField(
                   title: Constants.text.lastNameTextField,
                   oscureText: true,
                   onChanged: (value) {
