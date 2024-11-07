@@ -11,6 +11,12 @@ class PostEntity {
     this.userId = 0,
   });
 
+  factory PostEntity.empty() => const PostEntity(
+        body: '',
+        title: '',
+        userId: 0,
+      );
+
   PostEntity copyWith({
     int? id,
     String? title,

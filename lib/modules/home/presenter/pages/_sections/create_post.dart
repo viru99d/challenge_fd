@@ -50,15 +50,22 @@ void createPost(
               onChanged: (value) {
                 homeBloc.add(
                   UpdateUserIdEvent(
-                    int.parse(value),
+                    value.isNotEmpty ? int.parse(value) : 0,
                   ),
                 );
               },
             ),
             VerticalSpace.md,
-            PrimaryButton(
-              onPressed: () => homeBloc.add(SavePostEvent()),
-              title: Constants.text.savePostButton,
+            BlocBuilder<HomeBloc, HomeState>(
+              bloc: homeBloc,
+              builder: (context, state) {
+                return PrimaryButton(
+                  onPressed: state.model.canContinue
+                      ? () => homeBloc.add(SavePostEvent())
+                      : null,
+                  title: Constants.text.savePostButton,
+                );
+              },
             )
           ],
         ),

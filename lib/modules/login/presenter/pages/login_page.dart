@@ -81,8 +81,8 @@ class LoginPage extends StatelessWidget {
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
                     return PrimaryButton(
-                      onPressed: () => state.model.canContinue
-                          ? loginBloc.add(LoginSubmittedEvent())
+                      onPressed: state.model.canContinue
+                          ? () => loginBloc.add(LoginSubmittedEvent())
                           : null,
                       title: Constants.text.loginButtonTitle,
                     );

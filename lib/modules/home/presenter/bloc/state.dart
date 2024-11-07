@@ -59,6 +59,10 @@ class SavingPostState extends HomeState {
   const SavingPostState(super.model);
 }
 
+class ClearTextFieldState extends HomeState {
+  const ClearTextFieldState(super.model);
+}
+
 class Model extends Equatable {
   const Model({
     this.allPosts = const [],
@@ -76,6 +80,10 @@ class Model extends Equatable {
         posts,
         postEntity,
       ];
+  bool get canContinue =>
+      postEntity.title.isNotEmpty &&
+      postEntity.body.isNotEmpty &&
+      postEntity.userId != 0;
 
   Model copyWith({
     List<PostEntity>? allPosts,

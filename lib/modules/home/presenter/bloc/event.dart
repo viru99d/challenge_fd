@@ -33,3 +33,7 @@ class UpdateUserIdEvent extends HomeEvent {
 class SavePostEvent extends HomeEvent {
   SavePostEvent();
 }
+
+class ClearTextFieldEvent extends HomeEvent {
+  ClearTextFieldEvent();
+}

@@ -26,10 +26,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => createPost(
-          context,
-          homeBloc: homeBloc,
-        ),
+        onPressed: () {
+          homeBloc.add(ClearTextFieldEvent());
+          createPost(
+            context,
+            homeBloc: homeBloc,
+          );
+        },
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         child: const Icon(

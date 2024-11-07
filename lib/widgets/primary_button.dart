@@ -7,7 +7,7 @@ class PrimaryButton extends StatelessWidget {
     required this.title,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String title;
 
   @override

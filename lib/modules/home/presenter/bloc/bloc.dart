@@ -31,6 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<UpdateBodyEvent>(_updateBodyEvent);
     on<UpdateUserIdEvent>(_updateUserIdEvent);
     on<SavePostEvent>(_savePostEvent);
+    on<ClearTextFieldEvent>(_clearTextFieldEvent);
   }
 
   Future<void> _getPostEvent(
@@ -202,5 +203,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     }
+  }
+
+  void _clearTextFieldEvent(
+    ClearTextFieldEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(
+      ClearTextFieldState(
+        state.model.copyWith(
+          postEntity: PostEntity.empty(),
+        ),
+      ),
+    );
   }
 }
