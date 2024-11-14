@@ -9,13 +9,15 @@ class LoginRepositoryImpl implements LoginRepository {
   final Preferences preferences;
 
   @override
-  Future<bool> login(UserEntity user) async {
-    if (user.email == Constants.text.email &&
-        user.password == Constants.text.password) {
-      preferences.isAuthenticated = true;
-      return true;
+  Future<(bool, String)> login(UserEntity user) async {
+    if (user.email != Constants.text.email) {
+      return (false, Constants.text.invalidEmail);
+    }
+
+    if (user.password != Constants.text.password) {
+      return (false, Constants.text.invalidPassword);
     } else {
-      return false;
+      return (true, '');
     }
   }
 }

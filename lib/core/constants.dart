@@ -25,6 +25,8 @@ class _Text {
   final String savePostBody = 'Body';
   final String savePostUserId = 'UserId';
   final String savePostButton = 'Guardar Post';
+  final String invalidEmail = 'El email es incorrecto, ingrese otro';
+  final String invalidPassword = 'La contraseña es incorrecta, ingrese otra';
 }
 
 class _Assets {

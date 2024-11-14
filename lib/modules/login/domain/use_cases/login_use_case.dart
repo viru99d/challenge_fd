@@ -6,7 +6,7 @@ class LoginUseCase {
 
   LoginUseCase(this.repository);
 
-  Future<bool> call(UserEntity user) async {
+  Future<(bool, String)> call(UserEntity user) async {
     return await repository.login(user);
   }
 }

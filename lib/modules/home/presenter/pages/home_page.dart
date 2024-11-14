@@ -86,14 +86,6 @@ class HomePage extends StatelessWidget {
               Modular.to.navigate(Routes.login);
             }
 
-            if (state is SavingPostState) {
-              const CircularProgressIndicator();
-            }
-
-            if (state is SavingPostState) {
-              const CircularProgressIndicator();
-            }
-
             if (state is SavedPostState) {
               Modular.to.pop();
               Fluttertoast.showToast(
@@ -109,7 +101,7 @@ class HomePage extends StatelessWidget {
           },
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              if (state is LoadingPostState) {
+              if (state is LoadingPostState || state is SavingPostState) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is EmptyPostState) {
                 return EmptyState(homeBloc: homeBloc);

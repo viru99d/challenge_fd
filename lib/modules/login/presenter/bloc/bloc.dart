@@ -1,4 +1,3 @@
-import 'package:challenge_fd/core/constants.dart';
 import 'package:challenge_fd/modules/login/domain/entity/user_entity.dart';
 import 'package:challenge_fd/modules/login/domain/use_cases/login_use_case.dart';
 import 'package:equatable/equatable.dart';
@@ -58,13 +57,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     final isAuthenticated = await loginUseCase.call(userEntity);
 
-    if (isAuthenticated) {
+    if (isAuthenticated.$1) {
       emit(LoginSuccessState(state.model));
     } else {
       emit(
         LoginFailureState(
           state.model,
-          errorMessage: Constants.text.loginErrorMessage,
+          errorMessage: isAuthenticated.$2,
         ),
       );
     }
