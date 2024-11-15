@@ -16,11 +16,12 @@ dependencies:
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   flutter_modular: ^5.0.0
-  modular_bloc_bind: ^1.0.1
   shared_preferences: ^2.3.2
   fluttertoast: ^8.2.8
   dio: ^5.7.0
   flutter_svg: ^2.0.13
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
 
 
 dev_dependencies:
